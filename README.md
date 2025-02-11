@@ -1,2 +1,2 @@
 # subns-server
-Testing out sub/dom architecture
+Testing out sub/pub architecture
