@@ -1,2 +1,2 @@
-# subns-server
-Testing out sub/pub architecture
+# subs-api
+Testing out graph based architecture

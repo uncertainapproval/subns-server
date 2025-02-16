@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+gremlinpython
+pydantic
+pydantic[email]
+boto3

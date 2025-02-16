@@ -1,0 +1,38 @@
+
+services:
+  # Gremlin Server (Neptune Local substitute)
+  gremlin-server:
+    image: tinkerpop/gremlin-server:latest
+    container_name: gremlin-server
+    ports:
+      - "8182:8182"
+    volumes:
+      - gremlin-config:/opt/gremlin-server/conf
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx512m
+    networks:
+      - neptune-network
+
+  # FastAPI Application
+  fastapi-app:
+    image: subs-api
+    container_name: subs-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - GREMLIN_SERVER_URL=gremlin-server:8182
+    depends_on:
+      - gremlin-server
+    networks:
+      - neptune-network
+
+volumes:
+  gremlin-config:
+    driver: local
+
+networks:
+  neptune-network:
+    driver: bridge
